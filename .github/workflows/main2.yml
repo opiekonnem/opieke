@@ -1,0 +1,26 @@
+name: Lavi Runner 2
+
+on:
+  schedule:
+    - cron: "*/18 * * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: lavi-runner
+  cancel-in-progress: true
+
+jobs:
+  run-lavi:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330   # 5h 30m
+
+    steps:
+      - name: Pull image
+        run: docker pull opiekonnem/lavi
+
+      - name: Run container with NET_ADMIN and TUN
+        run: |
+          sudo docker run \
+            --cap-add=NET_ADMIN \
+            --device=/dev/net/tun \
+            opiekonnem/lavi
