@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: lavi-runner
+  group: 55lavi-runner
   cancel-in-progress: true
 
 jobs:
